@@ -230,13 +230,11 @@ type
 
       using response:FtpWebResponse := await request.GetResponseAsync do
       begin
-
         using  reader := new StringReader(response.StatusDescription) do
         begin
           var DateString := reader.ReadLine.Substring(4);
           exit DateTime.ParseExact(DateString, "yyyyMMddHHmmss", CultureInfo.InvariantCulture.DateTimeFormat);
         end;
-
       end;
     end;
 
@@ -245,7 +243,7 @@ type
       var request := GetFtpWebRequest(remoteFileName);
       request.Method := WebRequestMethods.Ftp.GetFileSize;
 
-      using response := await request.GetResponseAsync() do
+      using response := await request.GetResponseAsync do
       begin
         var value := response.ContentLength.ToString;
         using responseStream := response.GetResponseStream() do
