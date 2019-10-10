@@ -2,45 +2,52 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <ProductVersion>3.5</ProductVersion>
-    <RootNamespace>FTPDeployment</RootNamespace>
-    <ProjectGuid>{B4051AE7-D0B2-41A4-A9AD-3DDE62159264}</ProjectGuid>
+    <ProjectGuid>{3E60A148-C1D5-4636-BC8B-0DE2E086F858}</ProjectGuid>
+    <RootNamespace>FTPDeployment.Net.ConsoleApplication</RootNamespace>
     <OutputType>Exe</OutputType>
-    <AssemblyName>FTPDeploymentConsoleApplication</AssemblyName>
+    <AssemblyName>FTPDeployment.Net.ConsoleApplication</AssemblyName>
     <ApplicationIcon>Properties\App.ico</ApplicationIcon>
     <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
-    <TargetFramework>.NETCore2.2</TargetFramework>
-    <Mode>Echoes</Mode>
-    <NETCoreRuntimeVersion>2.2.1</NETCoreRuntimeVersion>
-    <NETCoreSDKVersion>2.2.103</NETCoreSDKVersion>
+    <TargetFramework>.NETFramework4.5</TargetFramework>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DefineConstants>DEBUG;TRACE;</DefineConstants>
     <Optimize>False</Optimize>
     <OutputPath>.\Bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;TRACE;</DefineConstants>
     <GeneratePDB>True</GeneratePDB>
     <GenerateMDB>True</GenerateMDB>
     <EnableAsserts>True</EnableAsserts>
     <CpuType>anycpu</CpuType>
     <EnableUnmanagedDebugging>False</EnableUnmanagedDebugging>
+    <WebDebugTarget>Cassini</WebDebugTarget>
+    <WebLaunchBrowser>False</WebLaunchBrowser>
+    <CodeFlowAnalysis>True</CodeFlowAnalysis>
+    <UseXmlDoc>False</UseXmlDoc>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <OutputPath>.\Bin\Release</OutputPath>
     <CpuType>anycpu</CpuType>
     <EnableUnmanagedDebugging>False</EnableUnmanagedDebugging>
+    <WebDebugTarget>Cassini</WebDebugTarget>
+    <WebLaunchBrowser>False</WebLaunchBrowser>
+    <CodeFlowAnalysis>True</CodeFlowAnalysis>
+    <UseXmlDoc>False</UseXmlDoc>
   </PropertyGroup>
   <ItemGroup>
-    <NuGetReference Include="Newtonsoft.Json:[12.0.1]">
-      <Private>True</Private>
-    </NuGetReference>
-    <NuGetReference Include="McMaster.Extensions.CommandLineUtils:[2.4.2]">
-      <Private>True</Private>
-    </NuGetReference>
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
     <ProjectReference Include="FTPDeployment.Core">
       <HintPath>..\FTPDeployment.Core\Bin\Debug\FTPDeployment.Core.dll</HintPath>
       <Project>{00A6E0A6-CE65-4782-9199-17E3156072AC}</Project>
       <ProjectFile>..\FTPDeployment.Core\FTPDeployment.Core.elements</ProjectFile>
       <Private>True</Private>
     </ProjectReference>
+    <NuGetReference Include="Newtonsoft.Json:[12.0.1]">
+      <Private>True</Private>
+    </NuGetReference>
+    <NuGetReference Include="McMaster.Extensions.CommandLineUtils:[2.4.2]">
+      <Private>True</Private>
+    </NuGetReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.pas" />
@@ -55,5 +62,5 @@
     </None>
     <Compile Include="Properties\Settings.Designer.pas" />
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\RemObjects Software\Elements\RemObjects.Elements.Echoes.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\RemObjects Software\Elements\RemObjects.Elements.Echoes.Mono.targets" />
 </Project>

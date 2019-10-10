@@ -1,4 +1,4 @@
-﻿namespace FTPDeployment;
+﻿namespace FTPDeployment.Core;
 
 uses
   System,
@@ -132,13 +132,15 @@ type
     method Download(remoteFileName: String): Task<Stream>;
     begin
       Validate.NotNullOrEmptyOrWhiteSpace(remoteFileName, nameOf(remoteFileName));
-      if Path.IsPathRooted(remoteFileName) then begin
+      if Path.IsPathRooted(remoteFileName) then
+      begin
         raise new ArgumentException('Must be a relative file path', nameOf(remoteFileName));
       end;
       var request := GetFtpWebRequest(remoteFileName);
       request.Method := WebRequestMethods.Ftp.DownloadFile;
-      using response := FtpWebResponse(await request.GetResponseAsync()) do begin
-        using responseStream := response.GetResponseStream() do begin
+      using response := FtpWebResponse(await request.GetResponseAsync) do
+      begin
+        using responseStream := response.GetResponseStream do begin
           var ms := new MemoryStream();
           await responseStream.CopyToAsync(ms);
           ms.Seek(0, SeekOrigin.Begin);
@@ -149,20 +151,26 @@ type
 
     method ListDirectory(remoteDirectory: String := nil): Task<array of String>;
     begin
-      if assigned(remoteDirectory) then begin
+      if assigned(remoteDirectory) then
+      begin
         remoteDirectory := remoteDirectory.Replace(#92, #47);
-        if not remoteDirectory.EndsWith('/') then begin
+        if not remoteDirectory.EndsWith('/') then
+        begin
           remoteDirectory := remoteDirectory + '/';
         end;
       end;
       var request := GetFtpWebRequest(remoteDirectory);
       request.Method := WebRequestMethods.Ftp.ListDirectory;
-      using response := FtpWebResponse(await request.GetResponseAsync()) do begin
-        using responseStream := response.GetResponseStream() do
-          using streamReader := new StreamReader(responseStream) do begin
-            var responseContent := await streamReader.ReadToEndAsync();
+      using response := FtpWebResponse(await request.GetResponseAsync) do
+      begin
+        using responseStream := response.GetResponseStream do
+        begin
+          using streamReader := new StreamReader(responseStream) do
+          begin
+            var responseContent := await streamReader.ReadToEndAsync;
             exit responseContent.Split([#13#10, #13, #10], StringSplitOptions.RemoveEmptyEntries);
           end;
+        end;
       end;
     end;
 
@@ -176,12 +184,16 @@ type
       end;
       var request := GetFtpWebRequest(remoteDirectory);
       request.Method := WebRequestMethods.Ftp.ListDirectoryDetails;
-      using response := FtpWebResponse(await request.GetResponseAsync()) do begin
+      using response := FtpWebResponse(await request.GetResponseAsync()) do
+      begin
         using responseStream := response.GetResponseStream() do
-          using streamReader := new StreamReader(responseStream) do begin
+        begin
+          using streamReader := new StreamReader(responseStream) do
+          begin
             var responseContent := await streamReader.ReadToEndAsync();
             exit responseContent.Split([#13#10, #13, #10], StringSplitOptions.RemoveEmptyEntries);
           end;
+        end;
       end;
     end;
 
@@ -190,7 +202,7 @@ type
       var request := GetFtpWebRequest(oldRemoteFileName);
       request.Method := WebRequestMethods.Ftp.Rename;
       request.RenameTo := newRemoteFileName;
-      using  await request.GetResponseAsync() do
+      using await request.GetResponseAsync() do
       begin
       end;
     end;
@@ -199,7 +211,7 @@ type
     begin
       var request := GetFtpWebRequest(remoteDirectoryName);
       request.Method := WebRequestMethods.Ftp.MakeDirectory;
-      using  await request.GetResponseAsync() do
+      using await request.GetResponseAsync() do
       begin
       end;
     end;
@@ -217,7 +229,7 @@ type
     begin
       var request := GetFtpWebRequest(remoteFileName);
       request.Method := WebRequestMethods.Ftp.DeleteFile;
-      using  await request.GetResponseAsync() do
+      using await request.GetResponseAsync() do
       begin
       end;
     end;
@@ -248,8 +260,9 @@ type
         var value := response.ContentLength.ToString;
         using responseStream := response.GetResponseStream() do
         begin
-          using streamReader := new StreamReader(responseStream) do begin
-            var responseContent := await streamReader.ReadToEndAsync();
+          using streamReader := new StreamReader(responseStream) do
+          begin
+            await streamReader.ReadToEndAsync;
             exit Convert.ToInt64(value);
           end;
         end;

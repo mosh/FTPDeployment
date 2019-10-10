@@ -1,4 +1,4 @@
-﻿namespace FTPDeployment;
+﻿namespace FTPDeployment.Core;
 
 uses
   System,

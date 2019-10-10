@@ -1,6 +1,10 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # RemObjects Fire
+Project("{656346D9-4656-40DA-A068-22D5425D4639}") = "FTPDeployment.Core", "FTPDeployment.Core\FTPDeployment.Core.elements", "{00A6E0A6-CE65-4782-9199-17E3156072AC}"
+EndProject
+Project("{656346D9-4656-40DA-A068-22D5425D4639}") = "FTPDeployment.Net.ConsoleApplication", "FTPDeployment.Net.ConsoleApplication\FTPDeployment.Net.ConsoleApplication.elements", "{3E60A148-C1D5-4636-BC8B-0DE2E086F858}"
+EndProject
 Project("{656346D9-4656-40DA-A068-22D5425D4639}") = "FTPDeploymentConsoleApplication", "FTPDeploymentConsoleApplication\FTPDeploymentConsoleApplication.elements", "{B4051AE7-D0B2-41A4-A9AD-3DDE62159264}"
 EndProject
 Global
@@ -9,6 +13,14 @@ Global
 		Release|AnyCPU = Release|AnyCPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{00A6E0A6-CE65-4782-9199-17E3156072AC}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
+		{00A6E0A6-CE65-4782-9199-17E3156072AC}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
+		{00A6E0A6-CE65-4782-9199-17E3156072AC}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
+		{00A6E0A6-CE65-4782-9199-17E3156072AC}.Release|AnyCPU.Build.0 = Release|AnyCPU
+		{3E60A148-C1D5-4636-BC8B-0DE2E086F858}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
+		{3E60A148-C1D5-4636-BC8B-0DE2E086F858}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
+		{3E60A148-C1D5-4636-BC8B-0DE2E086F858}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
+		{3E60A148-C1D5-4636-BC8B-0DE2E086F858}.Release|AnyCPU.Build.0 = Release|AnyCPU
 		{B4051AE7-D0B2-41A4-A9AD-3DDE62159264}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
 		{B4051AE7-D0B2-41A4-A9AD-3DDE62159264}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
 		{B4051AE7-D0B2-41A4-A9AD-3DDE62159264}.Release|AnyCPU.ActiveCfg = Release|AnyCPU

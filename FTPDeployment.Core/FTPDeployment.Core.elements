@@ -2,16 +2,13 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <ProductVersion>3.5</ProductVersion>
-    <RootNamespace>FTPDeployment</RootNamespace>
-    <ProjectGuid>{B4051AE7-D0B2-41A4-A9AD-3DDE62159264}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <AssemblyName>FTPDeploymentConsoleApplication</AssemblyName>
-    <ApplicationIcon>Properties\App.ico</ApplicationIcon>
+    <RootNamespace>FTPDeployment.Core</RootNamespace>
+    <ProjectGuid>{00A6E0A6-CE65-4782-9199-17E3156072AC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>FTPDeployment.Core</AssemblyName>
     <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
-    <TargetFramework>.NETCore2.2</TargetFramework>
+    <TargetFramework>.NETStandard</TargetFramework>
     <Mode>Echoes</Mode>
-    <NETCoreRuntimeVersion>2.2.1</NETCoreRuntimeVersion>
-    <NETCoreSDKVersion>2.2.103</NETCoreSDKVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <Optimize>False</Optimize>
@@ -29,23 +26,11 @@
     <EnableUnmanagedDebugging>False</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <NuGetReference Include="Newtonsoft.Json:[12.0.1]">
-      <Private>True</Private>
-    </NuGetReference>
-    <NuGetReference Include="McMaster.Extensions.CommandLineUtils:[2.4.2]">
-      <Private>True</Private>
-    </NuGetReference>
-    <ProjectReference Include="FTPDeployment.Core">
-      <HintPath>..\FTPDeployment.Core\Bin\Debug\FTPDeployment.Core.dll</HintPath>
-      <Project>{00A6E0A6-CE65-4782-9199-17E3156072AC}</Project>
-      <ProjectFile>..\FTPDeployment.Core\FTPDeployment.Core.elements</ProjectFile>
-      <Private>True</Private>
-    </ProjectReference>
+    <NuGetReference Include="McMaster.Extensions.CommandLineUtils:[2.4.2]" />
+    <NuGetReference Include="Newtonsoft.Json:[12.0.1]" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.pas" />
     <Compile Include="Properties\AssemblyInfo.pas" />
-    <Content Include="Properties\App.ico" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
@@ -54,6 +39,14 @@
       <Generator>SettingsSingleFileGenerator</Generator>
     </None>
     <Compile Include="Properties\Settings.Designer.pas" />
+    <Compile Include="DeploymentExtensions.pas" />
+    <Compile Include="FtpClient.pas" />
+    <Compile Include="FtpReplyException.pas" />
+    <Compile Include="Validate.pas" />
+    <Compile Include="FileUtil.pas" />
+    <Compile Include="Models\Upload.pas" />
+    <Compile Include="Models\Deployment.pas" />
+    <Compile Include="FTPProgram.pas" />
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\RemObjects Software\Elements\RemObjects.Elements.Echoes.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\RemObjects Software\Elements\RemObjects.Elements.targets" />
 </Project>

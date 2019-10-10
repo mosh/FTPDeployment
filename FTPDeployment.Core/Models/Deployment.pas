@@ -1,4 +1,4 @@
-﻿namespace FTPDeployment;
+﻿namespace FTPDeployment.Core.Models;
 
 uses
   System.Collections.Generic;
@@ -11,9 +11,9 @@ type
     property Username:String;
     property Password:String;
     property Host:String;
-    property LocalFolder:String;
-    property RemoteFolder:String;
-    property Files:List<String> := new List<String>;
+    property Uploads:List<Upload> := new List<Upload>;
+
+
   end;
 
 end.
