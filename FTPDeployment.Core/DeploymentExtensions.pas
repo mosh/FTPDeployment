@@ -57,7 +57,7 @@ type
         var files := await client.ListDirectory(upload.RemoteFolder);
 
         for each filename in files do
-          begin
+        begin
           var remoteFilename := $'{upload.RemoteFolder}/{filename}';
           try
             var dateTime := await client.GetLastModifiedTimestamp(remoteFilename);
@@ -83,8 +83,10 @@ type
 
         var remoteFiles := await client.ListDirectory(upload.RemoteFolder);
 
-          for each filename in upload.Files do
-            begin
+          for each file in upload.Files do
+          begin
+
+            var filename := iif(String.IsNullOrEmpty(file.ReName), file.Name, file.ReName);
 
             var remoteFilename := $'{upload.RemoteFolder}/{filename}';
 
@@ -93,9 +95,9 @@ type
               await MetaForFilename(client, remoteFilename,'Current');
             end;
 
-            var localFilename := Path.Combine(upload.LocalFolder,filename);
+            var localFilename := Path.Combine(upload.LocalFolder,file.Name);
 
-            if(File.Exists(localFilename))then
+            if(System.IO.File.Exists(localFilename))then
             begin
               await client.Upload(localFilename,remoteFilename);
 

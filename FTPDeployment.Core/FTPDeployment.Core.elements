@@ -47,6 +47,7 @@
     <Compile Include="Models\Upload.pas" />
     <Compile Include="Models\Deployment.pas" />
     <Compile Include="FTPProgram.pas" />
+    <Compile Include="Models\FIle.pas" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\RemObjects Software\Elements\RemObjects.Elements.targets" />
 </Project>

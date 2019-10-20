@@ -163,13 +163,23 @@ type
       request.Method := WebRequestMethods.Ftp.ListDirectory;
       using response := FtpWebResponse(await request.GetResponseAsync) do
       begin
-        using responseStream := response.GetResponseStream do
-        begin
-          using streamReader := new StreamReader(responseStream) do
-          begin
-            var responseContent := await streamReader.ReadToEndAsync;
-            exit responseContent.Split([#13#10, #13, #10], StringSplitOptions.RemoveEmptyEntries);
-          end;
+        case response.StatusCode of
+          550:
+            begin
+              Console.WriteLine('550');
+              exit [];
+            end;
+          else
+            begin
+              using responseStream := response.GetResponseStream do
+              begin
+                using streamReader := new StreamReader(responseStream) do
+                begin
+                  var responseContent := await streamReader.ReadToEndAsync;
+                  exit responseContent.Split([#13#10, #13, #10], StringSplitOptions.RemoveEmptyEntries);
+                end;
+              end;
+            end;
         end;
       end;
     end;

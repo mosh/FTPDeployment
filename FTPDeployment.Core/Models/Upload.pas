@@ -10,7 +10,7 @@ type
   public
     property LocalFolder:String;
     property RemoteFolder:String;
-    property Files:List<String> := new List<String>;
+    property Files:List<File> := new List<File>;
   end;
 
 end.
